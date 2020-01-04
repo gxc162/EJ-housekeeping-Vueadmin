@@ -42,121 +42,86 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
-
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect:'dashboard',
     children: [{
       path: 'dashboard',
-      name: 'Dashboard',
+      name: 'Dashbosard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: 'Dsahboard', icon: 'dashboard' }
     }]
   },
-
   {
-    path: '/example',
+    path: '/customer',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
+    children: [{
+      path: 'List',
+      name: 'customerlist',
+      component: () => import('@/pages/customer/List'),
+      meta: { title: '顾客管理', icon: 'dashboard' }
+    }]
   },
-
   {
-    path: '/form',
+    path: '/employee',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
+    children: [{
+      path: 'List',
+      name: 'employeelist',
+      component: () => import('@/pages/employee/List'),
+      meta: { title: '员工管理', icon: 'dashboard' }
+    }]
   },
-
   {
-    path: '/nested',
+    path: '/product',
     component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2' }
-      }
-    ]
+    children: [{
+      path: 'List',
+      name: 'productlist',
+      component: () => import('@/pages/product/List'),
+      meta: { title: '产品管理', icon: 'dashboard' }
+    }]
   },
-
   {
-    path: 'external-link',
+    path: '/category',
     component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
+    children: [{
+      path: 'List',
+      name: 'categorylist',
+      component: () => import('@/pages/category/List'),
+      meta: { title: '栏目管理', icon: 'dashboard' }
+    }]
+  },
+  {
+    path: '/address',
+    component: Layout,
+    children: [{
+      path: 'List',
+      name: 'addressList',
+      component: () => import('@/pages/address/List'),
+      meta: { title: '地址管理', icon: 'dashboard' }
+    }]
+  },
+  {
+    path: '/comment',
+    component: Layout,
+    children: [{
+      path: 'List',
+      name: 'commentList',
+      component: () => import('@/pages/comment/List'),
+      meta: { title: '评论管理', icon: 'dashboard' }
+    }]
+  },
+  {
+    path: '/order',
+    component: Layout,
+    children: [{
+      path: 'List',
+      name: 'orderList',
+      component: () => import('@/pages/order/List'),
+      meta: { title: '订单管理', icon: 'dashboard' }
+    }]
   },
 
   // 404 page must be placed at the end !!!
