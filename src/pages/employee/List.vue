@@ -13,7 +13,7 @@
             <el-table-column label="操作" fixed="right">
         <template v-slot="slot">
           <a href="" @click.prevent="toDeleteHandler(slot.row.id)">删除</a>
-          <a href="" @click.prevent="toUpdateHandler">修改</a>
+          <a href="" @click.prevent="toUpdateHandler(slot.row)">修改</a>
         </template>
       </el-table-column>
         </el-table>
@@ -112,21 +112,32 @@ export default {//暴露接口
     },toAddHandler(){
             this.title="录入员工信息";
             this.visible=true;
-        },toDeleteHandler(id){
-      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        });
-      })
-      
-    },toUpdateHandler(){
+        },
+        toDeleteHandler(id){
+            this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+            //调用后台接口完成删除
+            let url="http://localhost:6677/waiter/deleteById?id="+id;
+            request.get(url).then((response)=>{
+                //1.刷新数据
+                this.loadData();
+                //2.提示结果
+                this.$message({
+                type: 'success',
+                message: response.message
+                });
+            })
+          
+        })
+        },
+    toUpdateHandler(row){
       this.title="修改员工信息";
       this.visible = true;
+            this.form=row;
+
       
     },closeModalHandler(){
       this.visible = false;

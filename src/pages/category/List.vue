@@ -11,7 +11,7 @@
                     
                 <template v-slot="slot">
                     <a href="" @click.prevent="toDeleteHandler(slot.row.id)">删除</a>
-                    <a href="" @click.prevent="toUpdateHandler">修改</a>
+                    <a href="" @click.prevent="toUpdateHandler(slot.row)">修改</a>
                 </template>
             </el-table-column>
         </el-table>
@@ -89,15 +89,25 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
+            //调用后台接口完成删除
+            let url="http://localhost:6677/category/deleteById?id="+id;
+            request.get(url).then((response)=>{
+                //1.刷新数据
+                this.loaddata();
+                //2.提示结果
+                this.$message({
+                type: 'success',
+                message: response.message
+                });
+            })
+          
         })
         },
-        toUpdateHandler(){
+        toUpdateHandler(row){
             this.title="修改栏目信息";
             this.visible=true;
+            this.form=row;
+
 
         },
         closeModalHandler(){
