@@ -37,13 +37,12 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item label="所属栏目">
-                    <el-select v-model="value" placeholder="请选择">
+                    <el-select v-model="form.categoryTd" placeholder="请选择">
                         <el-option
-                        v-model="form.categoryTd"
                         v-for="item in options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id">
                         </el-option>
                     </el-select>
                     
@@ -84,6 +83,13 @@ import querystring from 'querystring'
 export default {
     //用于存放网页中需要调用的方法
     methods:{
+        loadCategory(){
+      let url = "http://localhost:6677/category/findAll"
+      request.get(url).then((response)=>{
+        // 将查询结果设置到products中，this指向外部函数的this
+        this.options = response.data;
+      })
+    },
         loaddata(){
             let url ="http://localhost:6677/product/findAll"
             request.get(url).then((response)=>{
@@ -153,23 +159,7 @@ export default {
     //用于存放要向网页中显示的数据
     data(){
         return{
-            options: [{
-          value: '选项1',
-          label: '123'
-        }, {
-          value: '选项2',
-          label: '家居养护'
-        }, {
-          value: '选项3',
-          label: '9357'
-        }, {
-          value: '选项4',
-          label: '洗护服务'
-        }, {
-          value: '选项5',
-          label: '生活急救箱'
-        }],
-            title:"修改产品信息",
+            options: [],
             visible:false,
             category:[],
             form:{}
@@ -179,6 +169,7 @@ export default {
         //this为当前web实例对象
         //文档vue实例创建完毕
         this.loaddata();
+        this.loadCategory();
     }
 }
 </script>
