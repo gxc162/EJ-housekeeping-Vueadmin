@@ -22,10 +22,10 @@
     <!-- /分页结束 -->
     <!-- 模态框 -->
     <el-dialog
-      :title="title"
+      title="title"
       :visible.sync="visible"
       width="60%">
-      测试：{{form}}
+      <!-- 测试：{{form}} -->
       <el-form :moduel="form" label-width="80px"> 
         <el-form-item label="用户名">
           <el-input v-model="form.username"/>

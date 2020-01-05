@@ -23,7 +23,7 @@
         </el-pagination>
         <!-- 模态框 -->
         <el-dialog
-            :title="title"
+            title="title"
             :visible.sync="visible"
             width="40%">
             <el-form :v-model="form" label-width="80px">
